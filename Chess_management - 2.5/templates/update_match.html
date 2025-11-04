@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Update Match</h1>
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Player 1: {{ match['s1_name'] }}</label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Player 2: {{ match['s2_name'] }}</label>
+    </div>
+    <div class="mb-3">
+        <label for="winner" class="form-label">Winner:</label>
+        <select name="winner" class="form-control">
+            <option value="">Select winner</option>
+            <option value="{{ match['student1_id'] }}">{{ match['s1_name'] }}</option>
+            <option value="{{ match['student2_id'] }}">{{ match['s2_name'] }}</option>
+            <option value="draw">Draw</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Match</button>
+</form>
+{% endblock %}

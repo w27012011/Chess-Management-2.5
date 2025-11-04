@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Batch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        select, input[type="text"], input[type="submit"] {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Select Batch or Create New</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="batch_name">Select Existing Batch:</label>
+                <select name="batch_name" id="batch_name">
+                    <option value="">-- Select a Batch --</option>
+                    {% for batch in batches %}
+                        <option value="{{ batch.batch_name }}">{{ batch.display_name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="action" value="select">
+                <input type="submit" value="Select Batch">
+            </div>
+        </form>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="batch_name">Create New Batch:</label>
+                <input type="text" name="batch_name" id="batch_name" placeholder="Enter batch name">
+                <input type="hidden" name="action" value="new">
+                <input type="submit" value="Create New Batch">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{noto}
+
+\geometry{margin=1in}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Large Chess Club Tournament Schedule} \\
+    \vspace{0.5cm}
+    Generated on \today
+\end{center}
+
+{% for i in range(0, matches|length, 20) %}
+\begin{table}[h]
+    \centering
+    \caption{Tournament Matches {{ i//20 + 1 }}}
+    \begin{tabular}{c l l}
+        \toprule
+        \textbf{Match ID} & \textbf{Player 1} & \textbf{Player 2} \\
+        \midrule
+        {% for match in matches[i:i+20] %}
+        {{ match.match_id }} & {{ match.s1_name }} & {{ match.s2_name }} \\
+        {% endfor %}
+        \bottomrule
+    \end{tabular}
+\end{table}
+{% if i + 20 < matches|length %}
+\clearpage
+{% endif %}
+{% endfor %}
+
+\end{document}

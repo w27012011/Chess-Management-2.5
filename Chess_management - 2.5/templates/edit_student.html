@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Edit Student</h1>
+<form method="POST">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" value="{{ student['name'] }}" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="class">Class</label>
+        <input type="text" name="class" value="{{ student['class'] }}" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="roll">Roll</label>
+        <input type="text" name="roll" value="{{ student['roll'] }}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="mobile">Mobile</label>
+        <input type="text" name="mobile" value="{{ student['mobile'] }}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="year">Year</label>
+        <input type="text" name="year" value="{{ student['year'] }}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="paid_entry">Paid Entry</label>
+        <input type="checkbox" name="paid_entry" {% if student['paid_entry'] %}checked{% endif %}>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+<a href="{{ url_for('students') }}">Back to Students</a>
+{% endblock %}

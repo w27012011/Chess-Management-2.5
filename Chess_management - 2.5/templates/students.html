@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Students</h1>
+<form method="get" class="mb-3">
+    <input type="text" name="q" value="{{ request.args.get('q', '') }}" class="form-control d-inline-block w-auto">
+    <button type="submit" class="btn btn-secondary">Search</button>
+</form>
+<div class="mb-3">
+    <a href="/students/add" class="btn btn-primary">Add Student</a>
+    <a href="/students/export_csv" class="btn btn-success">Download CSV</a>
+    <a href="/students/import_csv" class="btn btn-info">Import CSV</a>
+    <a href="/students/export_entry_fee" class="btn btn-warning">Download Entry Fee PDF</a>
+    <a href="/students/export_entry_fee_form" class="btn btn-warning">Download Entry Fee Form</a>
+    <a href="/entry_fee_history" class="btn btn-info">Entry Fee History</a>
+    <a href="/students/toggle_all_paid" class="btn btn-danger" onclick="return confirm('Are you sure you want to set all students\' paid entry to Yes?');">Set All Paid</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Roll</th>
+            <th>Mobile</th>
+            <th>Year</th>
+            <th>Points</th>
+            <th>Matches Played</th>
+            <th>Paid Entry</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student['student_id'] }}</td>
+            <td>{{ student['name'] }}</td>
+            <td>{{ student['class'] }}</td>
+            <td>{{ student['roll'] }}</td>
+            <td>{{ student['mobile'] }}</td>
+            <td>{{ student['year'] }}</td>
+            <td>{{ student['points'] }}</td>
+            <td>{{ student['matches_played'] }}</td>
+            <td>
+ <a href="/students/toggle_paid/{{ student['student_id'] }}"
+   class="{% if student['paid_entry'] %}paid-entry{% else %}unpaid-entry{% endif %}">
+   {{ 'Yes' if student['paid_entry'] else 'No' }}
+</a>
+            </td>
+            <td>
+                <a href="/students/edit/{{ student['student_id'] }}">Edit</a> |
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

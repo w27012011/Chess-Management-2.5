@@ -1,0 +1,258 @@
+/* static/css/style.css */
+/* CSS styling for the certificate and ID card templates. */
+/* Designed to be modern, elegant, and professional with a light beige background (#f0eadc), gold accents, and dark blue for school name. */
+/* Layouts optimized for printing: certificates in A4 landscape, ID cards in 2in x 3in, and batch ID cards on A4 portrait. */
+/* Responsive for screen viewing and client-side PDF generation. */
+
+/* Set page size for printing certificates */
+@page {
+    size: A4 landscape;
+    margin: 0;
+}
+
+/* Main certificate container */
+.certificate {
+    width: 297mm; /* A4 landscape width */
+    height: 210mm; /* A4 landscape height */
+    background-color: #f0eadc; /* Light beige background */
+    border: 3px double goldenrod; /* Subtle stylish gold frame */
+    position: relative;
+    padding: 20mm;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', serif; /* Professional serif font */
+    color: black;
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Subtle chess watermark for certificate */
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 300pt; /* Large for watermark effect */
+    color: gray;
+    opacity: 0.05; /* Very faint to avoid clutter */
+    pointer-events: none; /* Non-interactive */
+}
+
+/* Small logo at top-left for certificate */
+.logo-small {
+    position: absolute;
+    top: 10mm;
+    left: 10mm;
+    width: 30mm; /* Smaller size */
+    height: auto;
+}
+
+/* Big logo at center-top for certificate */
+.logo-big {
+    display: block;
+    width: 80mm; /* Larger size */
+    height: auto;
+    margin: 0 auto 10mm auto; /* Centered with spacing below */
+}
+
+/* School name styling for certificate */
+.school-name {
+    font-size: 24pt;
+    font-weight: bold;
+    color: navy; /* Dark blue accent */
+    text-align: center;
+    margin: 0;
+}
+
+/* Congratulatory text for certificate */
+.certify-text {
+    font-size: 20pt;
+    text-align: center;
+    margin: 20mm 0 10mm 0; /* Spacing */
+}
+
+/* Student name for certificate - large, bold, centered */
+.student-name {
+    font-size: 48pt;
+    font-weight: bold;
+    color: goldenrod; /* Gold accent for prominence */
+    text-align: center;
+    margin: 0;
+}
+
+/* Details paragraphs for certificate (class, rank, points, month_year) */
+.details {
+    font-size: 18pt;
+    text-align: center;
+    margin: 5mm 0;
+}
+
+/* Signature section at bottom-right for certificate */
+.signature {
+    position: absolute;
+    bottom: 10mm;
+    right: 10mm;
+    text-align: center;
+    width: 80mm;
+}
+
+.signature-line {
+    border-bottom: 1px solid black;
+    margin-bottom: 2mm;
+}
+
+.signature-label {
+    font-size: 14pt;
+    margin: 0;
+}
+
+/* Download button styling (for potential future use) */
+.download-btn {
+    display: inline-block;
+    margin: 10mm auto 0 auto; /* Centered with spacing above */
+    padding: 3mm 6mm;
+    background-color: navy; /* Matches school name color */
+    color: #f0eadc; /* Light beige for contrast */
+    text-decoration: none;
+    border-radius: 3mm;
+    font-size: 14pt;
+    font-family: 'Times New Roman', serif; /* Consistent font */
+    transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+    background-color: #1b263b; /* Darker navy on hover */
+}
+
+/* ID card styles */
+.id-card {
+    width: 2in; /* 2 inches wide */
+    height: 3in; /* 3 inches high */
+    background-color: #f0eadc; /* Light beige background */
+    border: 1px solid goldenrod; /* Gold border */
+    position: relative;
+    padding: 0.2in;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', serif; /* Consistent font */
+    color: black;
+    page-break-inside: avoid; /* Prevent splitting in batch printing */
+}
+
+/* Watermark logo for ID card */
+.watermark-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.5in; /* Scaled for ID card size */
+    opacity: 0.2; /* Subtle watermark */
+    pointer-events: none;
+}
+
+/* Small school name for ID card */
+.school-name-small {
+    font-size: 0.2in; /* Adjusted for small card size */
+    font-weight: bold;
+    color: navy; /* Matches certificate */
+    text-align: center;
+    margin: 0 0 0.1in 0;
+}
+
+/* Card title for ID card */
+.card-title {
+    font-size: 0.15in;
+    text-align: center;
+    margin: 0.1in 0;
+}
+
+/* Student details for ID card */
+.student-detail {
+    font-size: 0.12in;
+    margin: 0.05in 0;
+}
+
+/* A4 page for batch ID cards */
+.a4-page {
+    width: 8.27in; /* A4 portrait width */
+    height: 11.69in; /* A4 portrait height */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 0.2in; /* Spacing between cards */
+    padding: 0.5in;
+    box-sizing: border-box;
+    background-color: white; /* White background for A4 page */
+}
+
+/* Responsive adjustments for screen viewing */
+@media screen {
+    .certificate {
+        width: 90vw; /* Scale to viewport width */
+        height: calc(90vw * 210 / 297); /* Maintain A4 landscape aspect ratio */
+        margin: 20px auto; /* Center on screen */
+        padding: 5vw; /* Adjust padding responsively */
+    }
+
+    /* Adjust font sizes for certificate on smaller screens */
+    .school-name {
+        font-size: 18pt;
+    }
+
+    .certify-text {
+        font-size: 16pt;
+    }
+
+    .student-name {
+        font-size: 36pt;
+    }
+
+    .details {
+        font-size: 14pt;
+    }
+
+    .logo-big {
+        width: 60mm;
+    }
+
+    .logo-small {
+        width: 20mm;
+    }
+
+    .download-btn {
+        padding: 2mm 4mm;
+        font-size: 12pt;
+    }
+
+    /* ID card responsive adjustments */
+    .id-card {
+        width: 2in;
+        height: 3in;
+        margin: 10px auto; /* Center on screen for single card view */
+    }
+
+    .a4-page {
+        width: 90vw;
+        height: calc(90vw * 11.69 / 8.27); /* Maintain A4 portrait aspect ratio */
+        gap: 0.1in;
+        padding: 0.2in;
+    }
+}
+
+/* Print-specific styles */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .certificate {
+        page-break-after: avoid; /* Prevent page breaks */
+    }
+
+    .download-btn {
+        display: none; /* Hide download button when printing */
+    }
+
+    .a4-page {
+        page-break-after: always; /* Each batch page on a new sheet */
+    }
+}

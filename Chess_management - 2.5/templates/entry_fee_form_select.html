@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Download Entry Fee Form</h1>
+<form method="POST">
+    <div class="form-group">
+        <label for="fee_amount">Entry Fee Amount (Taka)</label>
+        <select name="fee_amount" class="form-control" required>
+            <option value="" disabled selected>Select fee amount</option>
+            <option value="10">10 Taka</option>
+            <option value="20">20 Taka</option>
+            <option value="30">30 Taka</option>
+            <option value="50">50 Taka</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Download PDF</button>
+</form>
+<a href="{{ url_for('students') }}">Back to Students</a>
+{% endblock %}

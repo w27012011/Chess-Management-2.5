@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Leaderboard {% if batch_id %} (Current Batch) {% elif month_filter %} ({{ month_filter }}) {% endif %}</h1>
+<div class="mb-3">
+    <form method="get" class="mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label">Class:</label>
+                <input type="text" name="class" value="{{ class_filter }}" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Month (YYYY-MM):</label>
+                <input type="text" name="month" value="{{ month_filter }}" class="form-control">
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-secondary">Filter</button>
+            </div>
+        </div>
+    </form>
+    <a href="{{ url_for('export_leaderboard', class=class_filter, month=month_filter) }}" class="btn btn-success">Download Leaderboard PDF</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Roll</th>
+            <th>Mobile</th>
+            <th>Year</th>
+            <th>Points</th>
+            <th>Matches Played</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for leader in leaders %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ leader['student_id'] }}</td>
+            <td>{{ leader['name'] }}</td>
+            <td>{{ leader['class'] }}</td>
+            <td>{{ leader['roll'] }}</td>
+            <td>{{ leader['mobile'] }}</td>
+            <td>{{ leader['year'] }}</td>
+            <td>{{ leader['points'] }}</td>
+            <td>{{ leader['matches_played'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

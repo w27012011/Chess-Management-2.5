@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Matches</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="mb-3">
+    <form method="POST" action="{{ url_for('auto_matches') }}" class="d-inline-block">
+        <label for="max_matches">Matches per Player (1-20):</label>
+        <input type="number" name="max_matches" min="1" max="20" value="5" required class="form-control d-inline-block w-auto">
+        <button type="submit" class="btn btn-primary">Generate Matches</button>
+    </form>
+    <a href="{{ url_for('export_schedule') }}" class="btn btn-success">Download Schedule PDF</a>
+    <a href="{{ url_for('export_results') }}" class="btn btn-info">Download Results PDF</a>
+<!-- <a href="{{ url_for('archive_matches') }}" class="btn btn-warning">Archive Completed Matches</a> -->
+    <a href="{{ url_for('match_history') }}" class="btn btn-secondary">View Match History</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Match ID</th>
+            <th>Player 1</th>
+            <th>Player 2</th>
+            <th>Winner</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for match in matches %}
+        <tr>
+            <td>{{ match['match_id'] }}</td>
+            <td>{{ match['s1_name'] }}</td>
+            <td>{{ match['s2_name'] }}</td>
+            <td>{{ match['winner_name'] or 'Not decided' }}</td>
+            <td>{{ match['match_date'] }}</td>
+            <td>
+                {% if not match['points_assigned'] %}
+                <a href="{{ url_for('update_match', match_id=match['match_id']) }}">Update</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

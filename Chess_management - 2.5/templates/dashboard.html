@@ -1,0 +1,18 @@
+<!-- templates/dashboard.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h1>Dashboard</h1>
+<p>Total Students: {{ total_students }}</p>
+<p>Total Matches: {{ total_matches }}</p>
+<h2>Top 5 Leaderboard</h2>
+<table class="table">
+    <thead>
+        <tr><th>Student ID</th><th>Name</th><th>Points</th></tr>
+    </thead>
+    <tbody>
+        {% for student in top5 %}
+        <tr><td>{{ student.student_id }}</td><td>{{ student.name }}</td><td>{{ student.points }}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

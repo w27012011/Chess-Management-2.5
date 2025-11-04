@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Entry Fee Report</h1>
+<form method="POST">
+    <div class="form-group">
+        <label for="fee_amount">Entry Fee Amount (Taka)</label>
+        <input type="number" name="fee_amount" class="form-control" required min="0" step="0.01">
+    </div>
+    <button type="submit" class="btn btn-primary">Generate PDF</button>
+</form>
+<a href="{{ url_for('students') }}">Back to Students</a>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Students CSV</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+        .instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Import Students from CSV</h1>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Import Form -->
+        <form method="POST" enctype="multipart/form-data" id="importForm">
+            <div class="mb-3">
+                <label for="file" class="form-label">Upload CSV File:</label>
+                <input type="file" class="form-control" name="file" id="file" accept=".csv" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Import</button>
+            <a href="{{ url_for('students') }}" class="btn btn-secondary">Back to Students</a>
+        </form>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h5>CSV Requirements:</h5>
+            <p>The CSV file must contain the following headers (case-sensitive):</p>
+            <ul>
+                <li><strong>ID</strong>: Unique student ID (e.g., 00001) or leave blank to auto-generate.</li>
+                <li><strong>Name</strong>: Student's full name (required).</li>
+                <li><strong>Class</strong>: Class/grade (e.g., 10A, required).</li>
+                <li><strong>Roll</strong>: Roll number (optional).</li>
+                <li><strong>Mobile</strong>: Mobile number (optional).</li>
+                <li><strong>Year</strong>: Academic year (e.g., 2025, optional).</li>
+            </ul>
+            <p>Example CSV format:</p>
+            <pre>
+ID,Name,Class,Roll,Mobile,Year
+00001,Test User 1,10A,101,1234567890,2025
+,Test User 2,10B,102,9876543210,2025
+            </pre>
+        </div>
+    </div>
+
+    <!-- Client-Side Validation Script -->
+    <script>
+        document.getElementById('importForm').addEventListener('submit', function(event) {
+            const fileInput = document.getElementById('file');
+            if (!fileInput.value.toLowerCase().endsWith('.csv')) {
+                event.preventDefault();
+                alert('Please select a valid .csv file.');
+            }
+        });
+    </script>
+</body>
+</html>
